@@ -3,7 +3,7 @@
 
 ##########################################################################################
 #                                 PyThon Port Scanner                                    #
-#                                 PyThon 端口掃描腳本                                     #
+#                                 PyThon 通訊埠掃描腳本                                     #
 #                                                                                        #
 # credit: Nelson (https://www.nelsongx.com)                                              #
 #                                                                                        #
@@ -108,18 +108,18 @@ elif lan == '2':
     while '.' not in ip or len(str(ip)) == 0:
         print('# 無效的IP地址。請再試一遍。')
         ip = str(input())
-    print('# 輸入開始的端口:')
+    print('# 輸入開始的通訊埠:')
     aport = int(input())
     while aport < 1:
-        print('# 你可以跟我講誰端口是負數嗎...請再輸一遍:')
+        print('# 你可以跟我講誰通訊埠是負數嗎...請再輸一遍:')
         aport = int(input())
-    print('# 輸入結束的端口:')
+    print('# 輸入結束的通訊埠:')
     eport = int(input())
     while eport < 1:
-        print('# 你可以跟我講誰端口是負數嗎...請再輸一遍:')
+        print('# 你可以跟我講誰通訊埠是負數嗎...請再輸一遍:')
         eport = int(input())
     while eport < aport:
-        print('# 結束的端口不可比開始的端口小。')
+        print('# 結束的通訊埠不可比開始的通訊埠小。')
         eport = int(input())
     print('# 請求速率: [fast(10RPS), normal(5RPS), slow(1RPS), custom(?RPS)]')
     timeout = str(input())
@@ -139,7 +139,7 @@ elif lan == '2':
         timeoutd = 0.2
     sys.stdout.write('\r# 請稍等，正在確定設定中...')
     sys.stdout.flush()
-    sys.stdout.write('\r\n\n# 輸入完成。請確保下面的數據是正確的，並輸入y來確定開始以及同意條款。\nIP: ' + ip + '\n端口範圍: ' + str(aport) + '~' + str(eport) + '\n請求IP: ' + re.sub("b","",re.sub("'", "", str(requests.get(url="https://api.ipify.org/").content))) + '\n\n# 輸入(y/N):')
+    sys.stdout.write('\r\n\n# 輸入完成。請確保下面的數據是正確的，並輸入y來確定開始以及同意條款。\nIP: ' + ip + '\n通訊埠範圍: ' + str(aport) + '~' + str(eport) + '\n請求IP: ' + re.sub("b","",re.sub("'", "", str(requests.get(url="https://api.ipify.org/").content))) + '\n\n# 輸入(y/N):')
     sys.stdout.flush()
     print('')
     confirm = str(input())
@@ -156,7 +156,7 @@ elif lan == '2':
             nowport = aport-startp
             percent = (nowport*100)//total
             timeleft = time.strftime('%H小時, %M分鐘, %S秒', time.gmtime((portleft*timeoutd)//1))
-            sys.stdout.write('\r處理中... | 端口: ' + str(port) + ' | ' + str(percent) + '% | ' + str(nowport) + '/' + str(total) +     ' | 剩下' + str(portleft) + '個端口  | eta. ' + str((timeleft)) + ' | 已掃描端口: ' + str(portresult))
+            sys.stdout.write('\r處理中... | 通訊埠: ' + str(port) + ' | ' + str(percent) + '% | ' + str(nowport) + '/' + str(total) +     ' | 剩下' + str(portleft) + '個通訊埠  | eta. ' + str((timeleft)) + ' | 已掃描通訊埠: ' + str(portresult))
             sys.stdout.flush()
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(float(timeoutd))
@@ -168,7 +168,7 @@ elif lan == '2':
 
         end = perf_counter()
         print('\n# 掃描完成。' + ' (花費' + str((end-start)//1) + '秒)')
-        print('# 已掃描端口: ' + str(portresult))
+        print('# 已掃描通訊埠: ' + str(portresult))
     else:
         print('# 不接受條款/退出程式。')
 else:
